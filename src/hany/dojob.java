@@ -1,0 +1,449 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package hany;
+
+import java.awt.Color;
+import java.awt.ComponentOrientation;
+import java.awt.Font;
+import java.awt.HeadlessException;
+import java.awt.Image;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+
+/**
+ *
+ * @author amnassar
+ */
+public final class dojob extends javax.swing.JInternalFrame {
+
+    /**
+     * Creates new form book
+     */
+    PreparedStatement pst;
+    ResultSet rs;
+    public String y;
+    public Calendar cal;
+    public int day;
+    public int month;
+    public int year;
+    String dayyy;
+    public String datee;
+    public String fulldatee;
+
+    public dojob() {
+        initComponents();
+
+        clear();
+        TableCellRenderer rendererFromHeader = tdetails.getTableHeader().getDefaultRenderer();
+        JLabel headerLabel = (JLabel) rendererFromHeader;
+        headerLabel.setHorizontalAlignment(JLabel.CENTER);
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        tdetails.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+        tdetails.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+        tdetails.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
+        tdetails.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
+        TableCellRenderer rendererFromHeader1 = tdetails1.getTableHeader().getDefaultRenderer();
+        JLabel headerLabel1 = (JLabel) rendererFromHeader1;
+        headerLabel1.setHorizontalAlignment(JLabel.CENTER);
+        DefaultTableCellRenderer centerRenderer1 = new DefaultTableCellRenderer();
+        centerRenderer1.setHorizontalAlignment(JLabel.CENTER);
+        tdetails1.getColumnModel().getColumn(0).setCellRenderer(centerRenderer1);
+        tdetails1.getColumnModel().getColumn(1).setCellRenderer(centerRenderer1);
+        tdetails1.getColumnModel().getColumn(2).setCellRenderer(centerRenderer1);
+        tdetails1.getColumnModel().getColumn(3).setCellRenderer(centerRenderer1);
+        tdetails.getTableHeader().setFont(new Font("Arial", Font.BOLD, 20));
+        tdetails.getTableHeader().setOpaque(false);
+        tdetails.getTableHeader().setBackground(new Color(138, 203, 195));
+        tdetails.getTableHeader().setForeground(new Color(0, 0, 0));
+        tdetails.setRowHeight(40);
+          tdetails1.getTableHeader().setFont(new Font("Arial", Font.BOLD, 20));
+        tdetails1.getTableHeader().setOpaque(false);
+        tdetails1.getTableHeader().setBackground(new Color(138, 203, 195));
+        tdetails1.getTableHeader().setForeground(new Color(0, 0, 0));
+        tdetails1.setRowHeight(40);
+        cal = new GregorianCalendar();
+        int dayy = cal.get(Calendar.DAY_OF_MONTH);
+        dayyy = String.valueOf(dayy);
+        if (dayy == 1 || dayy == 2 || dayy == 3 || dayy == 4
+                || dayy == 5 || dayy == 6 || dayy == 7 || dayy == 8 || dayy == 9) {
+            dayyy = String.valueOf(dayy);
+            dayyy = "0" + dayyy;
+        }
+        tablelord();
+        int month = cal.get(Calendar.MONTH) + 1;
+        int year = cal.get(Calendar.YEAR);
+        date1.setText(year + "-" + month + "-" + dayyy);
+        datee = date1.getText().toString();
+        TimeZone tz = TimeZone.getTimeZone("GMT+02");
+        Calendar c = Calendar.getInstance(tz);
+        String time = String.format("%02d", c.get(Calendar.HOUR_OF_DAY)) + ":"
+                + String.format("%02d", c.get(Calendar.MINUTE));
+        fulldatee = datee + " " + time;
+        Font bigFont = new Font("Arial", Font.BOLD, 30); // or whatever
+        tdetails.getTableHeader().setFont(bigFont);
+               class SayHello extends TimerTask {
+    public void run() {
+        tablelord(); 
+         tablelord2();
+    }
+}
+
+Timer timer = new Timer();
+timer.schedule(new SayHello(), 0, 60000);
+ 
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jLabel16 = new javax.swing.JLabel();
+        jPanel14 = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tdetails1 = new javax.swing.JTable();
+        delete5 = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tdetails = new javax.swing.JTable();
+        autoserial4 = new javax.swing.JLabel();
+        delete4 = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        serialid4 = new javax.swing.JLabel();
+        date4 = new javax.swing.JLabel();
+        date1 = new javax.swing.JLabel();
+        serialid5 = new javax.swing.JLabel();
+
+        jLabel16.setFont(new java.awt.Font("Sitka Text", 3, 24)); // NOI18N
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/71847608-close-up-of-handshake-on-city-background-with-abstract-sunlight-partnership-concept-double-exposure.jpg"))); // NOI18N
+
+        setMaximumSize(new java.awt.Dimension(1050, 730));
+        setMinimumSize(new java.awt.Dimension(1050, 730));
+        setPreferredSize(new java.awt.Dimension(1050, 730));
+
+        jPanel14.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel14.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel14.setMaximumSize(new java.awt.Dimension(1050, 730));
+        jPanel14.setMinimumSize(new java.awt.Dimension(1050, 730));
+        jPanel14.setPreferredSize(new java.awt.Dimension(1050, 730));
+        jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tdetails1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        tdetails1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "id", "التاريخ", "العمل", "العميل"
+            }
+        ));
+        tdetails1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tdetails1.setRowHeight(25);
+        tdetails1.setRowMargin(2);
+        tdetails1.setSelectionBackground(new java.awt.Color(204, 255, 255));
+        tdetails1.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        tdetails1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tdetails1MouseClicked(evt);
+            }
+        });
+        jScrollPane6.setViewportView(tdetails1);
+        if (tdetails1.getColumnModel().getColumnCount() > 0) {
+            tdetails1.getColumnModel().getColumn(0).setMinWidth(1);
+            tdetails1.getColumnModel().getColumn(0).setPreferredWidth(1);
+            tdetails1.getColumnModel().getColumn(0).setMaxWidth(1);
+        }
+
+        jPanel14.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 400, 730, 220));
+
+        delete5.setBackground(new java.awt.Color(138, 203, 195));
+        delete5.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        delete5.setText("انهاء");
+        delete5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delete5ActionPerformed(evt);
+            }
+        });
+        jPanel14.add(delete5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 640, 120, 40));
+
+        tdetails.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        tdetails.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "id", "التاريخ", "العمل", "العميل"
+            }
+        ));
+        tdetails.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tdetails.setRowHeight(25);
+        tdetails.setRowMargin(2);
+        tdetails.setSelectionBackground(new java.awt.Color(204, 255, 255));
+        tdetails.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        tdetails.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tdetailsMouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(tdetails);
+        if (tdetails.getColumnModel().getColumnCount() > 0) {
+            tdetails.getColumnModel().getColumn(0).setMinWidth(1);
+            tdetails.getColumnModel().getColumn(0).setPreferredWidth(1);
+            tdetails.getColumnModel().getColumn(0).setMaxWidth(1);
+        }
+
+        jPanel14.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 730, 220));
+
+        autoserial4.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        autoserial4.setForeground(new java.awt.Color(255, 255, 255));
+        autoserial4.setText("لإثسف");
+        jPanel14.add(autoserial4, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 10, 170, 60));
+
+        delete4.setBackground(new java.awt.Color(138, 203, 195));
+        delete4.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        delete4.setText("استلام");
+        delete4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delete4ActionPerformed(evt);
+            }
+        });
+        jPanel14.add(delete4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 340, 120, 40));
+
+        jLabel10.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel10.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
+        jLabel10.setText("جدول الاعمال");
+        jPanel14.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, 220, 50));
+
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/nYwGq3.jpg"))); // NOI18N
+        jLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 0, 0), 2));
+        jPanel14.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 730));
+
+        serialid4.setText("jLabel1");
+        jPanel14.add(serialid4, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 650, -1, -1));
+
+        date4.setText("jLabel1");
+        jPanel14.add(date4, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 170, -1, -1));
+
+        date1.setText("jLabel1");
+        jPanel14.add(date1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 370, -1, -1));
+
+        serialid5.setText("jLabel1");
+        jPanel14.add(serialid5, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 650, -1, -1));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1050, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 730, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void tdetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tdetailsMouseClicked
+        DefaultTableModel tmodel = (DefaultTableModel) tdetails.getModel();
+        int selectrowindex = tdetails.getSelectedRow();
+        serialid4.setText(tmodel.getValueAt(selectrowindex, 0).toString());
+    }//GEN-LAST:event_tdetailsMouseClicked
+
+    private void delete4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete4ActionPerformed
+        if (serialid4.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "اختر النوع المراد مسحة");
+
+        } else {
+            try {
+                String sqla = "UPDATE battry.schudle SET status='تحت العمل' where id = '" + serialid4.getText() + "'";
+                pst = (PreparedStatement) DBConnect.con.prepareStatement(sqla);
+                pst.executeUpdate();
+                tablelord(); 
+                tablelord2(); 
+                clear();
+            } catch (SQLException ex) {
+                Logger.getLogger(dojob.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_delete4ActionPerformed
+
+    private void tdetails1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tdetails1MouseClicked
+        DefaultTableModel tmodel = (DefaultTableModel) tdetails1.getModel();
+        int selectrowindex = tdetails1.getSelectedRow();
+        serialid5.setText(tmodel.getValueAt(selectrowindex, 0).toString());
+    }//GEN-LAST:event_tdetails1MouseClicked
+
+    private void delete5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete5ActionPerformed
+               if (serialid5.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "اختر النوع المراد مسحة");
+
+        } else {
+            try {
+                String sqla = "UPDATE battry.schudle SET status='تم الانتهاء',finishdate='"+fulldatee+"' where id = '" + serialid5.getText() + "'";
+                pst = (PreparedStatement) DBConnect.con.prepareStatement(sqla);
+                pst.executeUpdate();
+                tablelord(); 
+                tablelord2(); 
+                clear();
+            } catch (SQLException ex) {
+                Logger.getLogger(dojob.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_delete5ActionPerformed
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel autoserial4;
+    private javax.swing.JLabel date1;
+    private javax.swing.JLabel date4;
+    private javax.swing.JButton delete4;
+    private javax.swing.JButton delete5;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JLabel serialid4;
+    private javax.swing.JLabel serialid5;
+    private javax.swing.JTable tdetails;
+    private javax.swing.JTable tdetails1;
+    // End of variables declaration//GEN-END:variables
+
+    public void tablelord() {
+        try {
+            String sqll = "SELECT * FROM battry.schudle where status= 'تحت التنفيذ' order by id DESC";
+            pst = (PreparedStatement) DBConnect.con.prepareStatement(sqll);
+            rs = pst.executeQuery();
+            DefaultTableModel model = (DefaultTableModel) tdetails.getModel();
+            model.setRowCount(0);
+            int x = 1;
+            while (rs.next()) {
+                Object row[] = {
+                    rs.getString("id"),
+                    rs.getString("date"),
+                    rs.getString("work"),
+                    rs.getString("customer")
+
+                };
+                model.addRow(row);
+                x++;
+
+            }
+            if (x >= 11) {
+            } else {
+                for (int z = x; z < 20; z++) {
+                    Object rowData[] = {
+                        "", "", "", "", "",};
+                    model.addRow(rowData);
+                }
+            }
+        } catch (SQLException ex) {
+
+        }
+    }
+     public void tablelord2() {
+        try {
+            String sqll = "SELECT * FROM battry.schudle where status= 'تحت العمل' order by id DESC";
+            pst = (PreparedStatement) DBConnect.con.prepareStatement(sqll);
+            rs = pst.executeQuery();
+            DefaultTableModel model = (DefaultTableModel) tdetails1.getModel();
+            model.setRowCount(0);
+            int x = 1;
+            while (rs.next()) {
+                Object row[] = {
+                    rs.getString("id"),
+                    rs.getString("date"),
+                    rs.getString("work"),
+                    rs.getString("customer")
+
+                };
+                model.addRow(row);
+                x++;
+
+            }
+            if (x >= 11) {
+            } else {
+                for (int z = x; z < 20; z++) {
+                    Object rowData[] = {
+                        "", "", "", "", "",};
+                    model.addRow(rowData);
+                }
+            }
+        } catch (SQLException ex) {
+
+        }
+    }
+
+    public void clear() {
+        serialid4.setText("");
+    }
+
+   
+
+}
